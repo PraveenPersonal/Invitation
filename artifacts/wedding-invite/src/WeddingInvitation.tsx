@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, MapPin, Moon, Heart, Volume2, VolumeX, Sparkles, Navigation, CheckCircle2, Send, Share2, ZoomIn, X } from 'lucide-react';
-import coupleImg from './assets/couple.jpg';
+import coupleImg from './assets/couple.png';
 
 const Petals = () => {
   return (
