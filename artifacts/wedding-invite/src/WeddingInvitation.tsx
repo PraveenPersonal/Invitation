@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, MapPin, Moon, Heart, Volume2, VolumeX, Sparkles, Navigation, CheckCircle2, Send, Share2, ZoomIn, X } from 'lucide-react';
+import { Calendar, Clock, MapPin, Moon, Heart, Volume2, VolumeX, Sparkles, Navigation, CheckCircle2, Send, Share2, ZoomIn, X, Phone } from 'lucide-react';
 import coupleImg from './assets/couple.png';
 
 const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -475,7 +475,7 @@ export default function WeddingInvitation() {
                   <SectionDivider />
 
                   {/* 5. COUNTDOWN TIMER */}
-                  <motion.div variants={sectionVariants} className="w-full my-4">
+                  {/* <motion.div variants={sectionVariants} className="w-full my-4">
                     <p className="text-xs uppercase tracking-[0.25em] font-cinzel text-[#6B1B2A] font-bold mb-3">Countdown to Muhurtham</p>
                     <div className="grid grid-cols-4 gap-2 sm:gap-3 max-w-[380px] mx-auto">
                       {[
@@ -490,7 +490,7 @@ export default function WeddingInvitation() {
                         </div>
                       ))}
                     </div>
-                  </motion.div>
+                  </motion.div> */}
 
                   {/* 6. EVENT & VENUE DETAILS CARD */}
                   <motion.div variants={sectionVariants} className="w-full bg-[#FFFDF7] border-2 border-[#D4AF37] p-5 sm:p-6 rounded-xl my-6 shadow-[0_8px_25px_rgba(212,175,55,0.15)] relative text-left">
@@ -578,7 +578,10 @@ export default function WeddingInvitation() {
                         <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">B.Com., CAIIB • Chief Manager (Retd.), IOB</p>
                         <p className="text-sm font-bold text-[#5A1421]">Mrs. M. Shanthi</p>
                         <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">B.Sc.</p>
-                        <p className="text-[11px] text-[#D4AF37] font-bold mt-1">📞 82208 32697</p>
+                        <a href="tel:+918220832697" className="inline-flex items-center gap-1.5 text-xs text-[#5A1421] font-sans hover:text-[#6B1B2A] transition-colors mt-1 font-medium">
+                          <Phone className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+                          <span>82208 32697</span>
+                        </a>
                       </div>
 
                       {/* Bride Parents */}
@@ -588,7 +591,10 @@ export default function WeddingInvitation() {
                         <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">AMK Jewel Works &amp; Gems</p>
                         <p className="text-sm font-bold text-[#5A1421]">Mrs. K. Vijaya</p>
                         <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">B.A.</p>
-                        <p className="text-[11px] text-[#D4AF37] font-bold mt-1">📞 98431 42063</p>
+                        <a href="tel:+919843142063" className="inline-flex items-center gap-1.5 text-xs text-[#5A1421] font-sans hover:text-[#6B1B2A] transition-colors mt-1 font-medium">
+                          <Phone className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+                          <span>98431 42063</span>
+                        </a>
                       </div>
                     </div>
                   </motion.div>
