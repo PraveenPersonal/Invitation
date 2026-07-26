@@ -11,10 +11,10 @@ paths = [ "/" ]
 localPort = 24366
 
 [services.development]
-run = "pnpm --filter @workspace/wedding-invite run dev"
+run = "npm run dev --workspace=artifacts/wedding-invite"
 
 [services.production]
-build = [ "pnpm", "--filter", "@workspace/wedding-invite", "run", "build" ]
+build = [ "npm", "run", "build", "--workspace=artifacts/wedding-invite" ]
 serve = "static"
 publicDir = "artifacts/wedding-invite/dist/public"
 
