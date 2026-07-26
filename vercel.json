@@ -1,9 +1,8 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "outputDirectory": "dist",
+  "buildCommand": "npm run build --prefix artifacts/wedding-invite",
+  "installCommand": "npm install --prefix artifacts/wedding-invite",
+  "outputDirectory": "artifacts/wedding-invite/dist",
   "framework": "vite",
-  "rootDirectory": "artifacts/wedding-invite",
   "rewrites": [
     {
       "source": "/(.*)",
