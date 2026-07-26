@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, MapPin, Moon, Heart, Volume2, VolumeX, Sparkles, Navigation, CheckCircle2, Send, Share2, ZoomIn, X } from 'lucide-react';
+import coupleImg from './assets/couple.jpg';
 
 const Petals = () => {
   return (
@@ -291,7 +292,7 @@ export default function WeddingInvitation() {
                 transition={{ duration: 0.85, delay: 0.25, ease: 'easeOut' }}
               >
                 <div className="w-full h-24 rounded overflow-hidden border border-[#D4AF37]/40 relative mb-2">
-                  <img src="/couple.jpg" alt="M. Karthikeyan & K. Soundariya" className="w-full h-full object-cover object-top" />
+                  <img src={coupleImg} alt="M. Karthikeyan & K. Soundariya" className="w-full h-full object-cover object-top" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#3D0C14]/60 to-transparent" />
                 </div>
                 <p className="font-serif text-[11px] text-[#6B1B2A] font-bold tracking-widest uppercase">M. Karthikeyan &amp; K. Soundariya</p>
@@ -402,7 +403,7 @@ export default function WeddingInvitation() {
                       <div className="relative rounded-2xl overflow-hidden p-2.5 bg-gradient-to-b from-[#FFE89C] via-[#D4AF37] to-[#AA8022] shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:scale-[1.02]">
                         <div className="relative rounded-xl overflow-hidden border-2 border-[#FFE89C]">
                           <img 
-                            src="/couple.jpg" 
+                            src={coupleImg} 
                             alt="M. Karthikeyan & K. Soundariya" 
                             className="w-full h-auto object-cover max-h-[520px] rounded-xl shadow-inner"
                           />
@@ -665,7 +666,7 @@ export default function WeddingInvitation() {
               className="relative max-w-[90vw] max-h-[85vh] rounded-xl overflow-hidden border-2 border-[#D4AF37] shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <img src="/couple.jpg" alt="Full Portrait" className="w-auto h-auto max-h-[85vh] object-contain" />
+              <img src={coupleImg} alt="Full Portrait" className="w-auto h-auto max-h-[85vh] object-contain" />
             </motion.div>
             <p className="font-serif text-[#FFE89C] text-sm mt-3 italic">M. Karthikeyan &amp; K. Soundariya</p>
           </motion.div>
