@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, MapPin, Moon, Heart, Sparkles, Navigation, CheckCircle2, Send, Share2, ZoomIn, X, Phone } from 'lucide-react';
 import coupleImg from './assets/couple.png';
 import flowerImg from './assets/flowers.png';
+import cardBg from './assets/card_bg.png';
 
 const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
   const target = e.currentTarget;
@@ -184,7 +185,7 @@ export default function WeddingInvitation() {
   };
 
   const handleMaps = () => {
-    const venue = encodeURIComponent("Kongu Vellala Goundar Thirumana Mandapam, Cuddalore Main Road, Ammapet, Salem");
+    const venue = encodeURIComponent("M662+RGX, Kamarajar Nagar Colony, Ammapet, Salem (M.Corp.), Tamil Nadu 636014");
     window.open(`https://www.google.com/maps/search/?api=1&query=${venue}`, '_blank');
   };
 
@@ -215,7 +216,7 @@ export default function WeddingInvitation() {
   };
 
   return (
-    <div className="min-h-[100dvh] w-full bg-[#2A080E] overflow-x-hidden relative font-sans text-center text-[#5A1421] selection:bg-[#D4AF37]/30 selection:text-[#FFE89C]">
+    <div className="min-h-[100dvh] w-full overflow-x-hidden relative font-sans text-center">
       <Petals />
 
 
@@ -223,111 +224,84 @@ export default function WeddingInvitation() {
       <AnimatePresence>
         {!showCard && (
           <motion.div
-            className="fixed inset-0 flex flex-col items-center justify-center z-20 p-4 bg-gradient-to-b from-[#2A080E] via-[#3D0C14] to-[#2A080E]"
-            exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.8 } }}
+            className="fixed inset-0 flex flex-col items-center justify-center z-30 p-4 sm:p-6 overflow-y-auto text-center select-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.8 } }}
           >
-            {/* Ambient Title */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8 text-center px-4"
-            >
-              <p className="font-serif text-[#D4AF37] italic text-lg sm:text-xl tracking-wider mb-1">Wedding Invitation</p>
-              <h2 className="font-cinzel text-2xl sm:text-3xl text-[#FFE89C] font-bold tracking-widest drop-shadow-md">
-                Karthikeyan &amp; Soundariya
-              </h2>
-              <p className="text-xs text-[#E8D385]/70 tracking-[0.25em] uppercase mt-2">07 September 2026 • Salem</p>
-            </motion.div>
+            {/* Centered Content Wrapper */}
+            <div className="my-auto w-full max-w-sm sm:max-w-md flex flex-col items-center justify-center space-y-5 sm:space-y-6 px-2 py-4">
 
-            {/* The Royal Envelope */}
-            <div className="relative w-full max-w-[380px] mb-8 pb-10">
-              {/* Flower Bouquet — Left */}
-              <img
-                src={flowerImg}
-                alt=""
-                className="absolute -left-16 -bottom-5 w-36 h-36 object-contain opacity-90 pointer-events-none select-none z-10"
-                style={{ transform: 'scaleX(-1) rotate(-15deg)' }}
-              />
-              {/* Flower Bouquet — Right */}
-              <img
-                src={flowerImg}
-                alt=""
-                className="absolute -right-16 -bottom-5 w-36 h-36 object-contain opacity-90 pointer-events-none select-none z-10"
-                style={{ transform: 'rotate(15deg)' }}
-              />
-
-              {/* Envelope box */}
-              <div className="relative w-full aspect-[4/3] perspective-[1200px]">
-                {/* Back */}
-                <div className="absolute inset-0 bg-[#3D0C14] rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-[#D4AF37]/30" />
-
-                {/* Inner Silk Pattern */}
-                <div className="absolute inset-1.5 bg-[#4A101A] rounded opacity-70 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:14px_14px]" />
-
-                {/* Thumbnail Couple Portrait Card sliding out */}
-                <motion.div
-                  className="absolute left-4 right-4 bottom-2 bg-[#FDF6E3] rounded-t-lg border-t-2 border-l-2 border-r-2 border-[#D4AF37] shadow-2xl flex flex-col items-center pt-3 px-3 pb-2 z-10 overflow-hidden"
-                  initial={{ top: '25px' }}
-                  animate={{ top: isOpen ? '-120px' : '25px' }}
-                  transition={{ duration: 0.85, delay: 0.25, ease: 'easeOut' }}
-                >
-                  <div className="w-full h-24 rounded overflow-hidden border border-[#D4AF37]/40 relative mb-2">
-                    <img src={coupleImg} onError={handleImageError} alt="M. Karthikeyan & K. Soundariya" className="w-full h-full object-cover object-top" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#3D0C14]/60 to-transparent" />
-                  </div>
-                  <p className="font-serif text-[11px] text-[#6B1B2A] font-bold tracking-widest uppercase">M. Karthikeyan &amp; K. Soundariya</p>
-                  <p className="text-[9px] text-[#D4AF37] tracking-wider uppercase font-semibold">Salem • Muhurtham</p>
-                </motion.div>
-
-                {/* Front Flaps */}
-                <div className="absolute inset-0 z-20 pointer-events-none drop-shadow-2xl overflow-hidden rounded-b-lg">
-                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-[#4A101A]">
-                    <polygon points="0,100 50,48 100,100" fill="currentColor" stroke="#6B1B2A" strokeWidth="0.5" />
-                    <polygon points="0,0 50,48 0,100" fill="#3D0C14" stroke="#2A080E" strokeWidth="0.5" />
-                    <polygon points="100,0 50,48 100,100" fill="#3D0C14" stroke="#2A080E" strokeWidth="0.5" />
-                  </svg>
-                </div>
-
-                {/* Top Flap */}
-                <motion.div
-                  className="absolute top-0 left-0 w-full h-[62%] origin-top z-30 drop-shadow-2xl"
-                  initial={{ rotateX: 0 }}
-                  animate={{ rotateX: isOpen ? -180 : 0, zIndex: isOpen ? 5 : 30 }}
-                  transition={{ duration: 0.85, ease: 'easeInOut' }}
-                >
-                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-[#5A1421]">
-                    <polygon points="0,0 100,0 50,100" fill="currentColor" stroke="#7A1F30" strokeWidth="0.5" />
-                  </svg>
-
-                  {/* Royal Wax Seal */}
-                  <motion.div
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.6)] flex items-center justify-center border-2 border-[#FFE89C] bg-gradient-to-br from-[#D4AF37] via-[#AA8022] to-[#6A4E00]"
-                    animate={{ opacity: isOpen ? 0 : 1, scale: isOpen ? 0.8 : 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="w-[88%] h-[88%] rounded-full border border-[#FFE89C]/40 flex flex-col items-center justify-center bg-gradient-to-br from-[#AA8022] via-[#D4AF37] to-[#805F10] shadow-inner">
-                      <span className="font-cinzel text-[#FFE89C] text-sm font-bold tracking-tighter drop-shadow">K &amp; S</span>
-                      <span className="text-[7px] text-[#FFE89C]/80 font-serif">07.09.26</span>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </div>{/* end envelope box */}
-            </div>{/* end envelope wrapper */}
-
-            {/* Tap to Open Button */}
-            {!isOpen && (
-              <motion.button
-                onClick={handleOpen}
-                initial={{ opacity: 0, y: 20 }}
+              {/* Ambient Header */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="shimmer-button px-9 py-3.5 rounded-full text-[#3D0C14] font-cinzel font-bold text-sm tracking-widest uppercase shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95 transition-all border border-[#FFE89C]/60 flex items-center gap-2"
+                transition={{ duration: 0.6 }}
+                className="flex flex-col items-center"
               >
-                <Sparkles className="w-4 h-4 text-[#3D0C14]" />
-                Open Royal Invitation
-                <Sparkles className="w-4 h-4 text-[#3D0C14]" />
-              </motion.button>
-            )}
+                <p className="font-serif italic text-[#D4AF37] text-xl sm:text-2xl tracking-widest">
+                  Wedding Invitation
+                </p>
+              </motion.div>
+
+              {/* The Royal Envelope Card Cover */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.15 }}
+                className="relative w-full max-w-[450px] sm:max-w-[480px] aspect-[2/3]   rounded-2xl cursor-pointer royal-glow group"
+                onClick={handleOpen}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {/* Parchment background texture */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90 pointer-events-none z-0"
+                  style={{ backgroundImage: `url(${cardBg})` }}
+                />
+
+                {/* Center Content Box inside Envelope */}
+                <div className="relative z-20 w-full h-full flex flex-col items-center justify-center p-2 text-center">
+                  <div className="w-full px-3 sm:px-4 py-4 sm:py-5  rounded-xl shadow-inner flex flex-col items-center space-y-2">
+                    <p className="text-xs font-serif italic text-[#800020] tracking-wider uppercase">Save The Date</p>
+
+                    <LotusDivider />
+
+                    <div className="py-1">
+                      <p className="font-cinzel text-base sm:text-lg text-[#4A101A] font-bold uppercase tracking-wider drop-shadow-sm leading-tight">
+                        M. Karthikeyan
+                      </p>
+                      <span className="font-script text-3xl text-[#D4AF37] lowercase font-normal my-0.5 inline-block">&amp;</span>
+                      <p className="font-cinzel text-base sm:text-lg text-[#4A101A] font-bold uppercase tracking-wider drop-shadow-sm leading-tight">
+                        K. Soundariya
+                      </p>
+                    </div>
+
+                    <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent my-0.5" />
+
+                    <p className="text-[11px] font-cinzel font-semibold tracking-widest text-[#6B1B2A] uppercase">
+                      Monday • 07 Sep 2026
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Tap to Open CTA Button */}
+              {!isOpen && (
+                <motion.button
+                  onClick={handleOpen}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 }}
+                  className="shimmer-button px-8 py-3.5 rounded-full text-[#3D0C14] font-cinzel font-bold text-sm tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.45)] hover:scale-105 active:scale-95 transition-all border border-[#FFE89C]/80 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4 text-[#3D0C14] animate-pulse" />
+                  <span>Open Royal Invitation</span>
+                  <Sparkles className="w-4 h-4 text-[#3D0C14] animate-pulse" />
+                </motion.button>
+              )}
+
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -442,25 +416,7 @@ export default function WeddingInvitation() {
                     </div>
                   </motion.div>
 
-                  <SectionDivider />
-
-                  {/* 5. COUNTDOWN TIMER */}
-                  {/* <motion.div variants={sectionVariants} className="w-full my-4">
-                    <p className="text-xs uppercase tracking-[0.25em] font-cinzel text-[#6B1B2A] font-bold mb-3">Countdown to Muhurtham</p>
-                    <div className="grid grid-cols-4 gap-2 sm:gap-3 max-w-[380px] mx-auto">
-                      {[
-                        { label: 'Days', val: timeLeft.days },
-                        { label: 'Hours', val: timeLeft.hours },
-                        { label: 'Mins', val: timeLeft.minutes },
-                        { label: 'Secs', val: timeLeft.seconds },
-                      ].map((item, idx) => (
-                        <div key={idx} className="bg-[#4A101A] text-[#FFE89C] rounded-lg p-2.5 border border-[#D4AF37]/50 shadow-md flex flex-col items-center">
-                          <span className="font-cinzel text-xl sm:text-2xl font-bold">{String(item.val).padStart(2, '0')}</span>
-                          <span className="text-[9px] uppercase tracking-widest text-[#D4AF37] mt-0.5">{item.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div> */}
+                  {/* <SectionDivider /> */}
 
                   {/* 6. EVENT & VENUE DETAILS CARD */}
                   <motion.div variants={sectionVariants} className="w-full bg-[#FFFDF7] border-2 border-[#D4AF37] p-5 sm:p-6 rounded-xl my-6 shadow-[0_8px_25px_rgba(212,175,55,0.15)] relative text-left">
@@ -489,16 +445,6 @@ export default function WeddingInvitation() {
                         <div>
                           <p className="text-[11px] uppercase tracking-wider text-[#D4AF37] font-bold">Muhurtham</p>
                           <p className="font-bold text-[#6B1B2A] text-base">9:00 AM – 10:00 AM</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3.5">
-                        <div className="p-2 rounded-full bg-[#4A101A] text-[#FFE89C] shrink-0 mt-0.5 shadow-sm">
-                          <Moon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <p className="text-[11px] uppercase tracking-wider text-[#D4AF37] font-bold">Tamil Calendar</p>
-                          <p className="font-semibold text-[#5A1421]">Aavani 21, 2026</p>
                         </div>
                       </div>
 
