@@ -3,6 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, MapPin, Moon, Heart, Volume2, VolumeX, Sparkles, Navigation, CheckCircle2, Send, Share2, ZoomIn, X } from 'lucide-react';
 import coupleImg from './assets/couple.png';
 
+const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const target = e.currentTarget;
+  if (!target.dataset.fallbackCount) {
+    target.dataset.fallbackCount = '1';
+    target.src = '/couple.png';
+  } else if (target.dataset.fallbackCount === '1') {
+    target.dataset.fallbackCount = '2';
+    target.src = '/couple.jpg';
+  }
+};
+
 const Petals = () => {
   return (
     <>
@@ -292,7 +303,7 @@ export default function WeddingInvitation() {
                 transition={{ duration: 0.85, delay: 0.25, ease: 'easeOut' }}
               >
                 <div className="w-full h-24 rounded overflow-hidden border border-[#D4AF37]/40 relative mb-2">
-                  <img src={coupleImg} alt="M. Karthikeyan & K. Soundariya" className="w-full h-full object-cover object-top" />
+                  <img src={coupleImg} onError={handleImageError} alt="M. Karthikeyan & K. Soundariya" className="w-full h-full object-cover object-top" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#3D0C14]/60 to-transparent" />
                 </div>
                 <p className="font-serif text-[11px] text-[#6B1B2A] font-bold tracking-widest uppercase">M. Karthikeyan &amp; K. Soundariya</p>
@@ -404,6 +415,7 @@ export default function WeddingInvitation() {
                         <div className="relative rounded-xl overflow-hidden border-2 border-[#FFE89C]">
                           <img 
                             src={coupleImg} 
+                            onError={handleImageError}
                             alt="M. Karthikeyan & K. Soundariya" 
                             className="w-full h-auto object-cover max-h-[520px] rounded-xl shadow-inner"
                           />
@@ -666,7 +678,7 @@ export default function WeddingInvitation() {
               className="relative max-w-[90vw] max-h-[85vh] rounded-xl overflow-hidden border-2 border-[#D4AF37] shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <img src={coupleImg} alt="Full Portrait" className="w-auto h-auto max-h-[85vh] object-contain" />
+              <img src={coupleImg} onError={handleImageError} alt="Full Portrait" className="w-auto h-auto max-h-[85vh] object-contain" />
             </motion.div>
             <p className="font-serif text-[#FFE89C] text-sm mt-3 italic">M. Karthikeyan &amp; K. Soundariya</p>
           </motion.div>
