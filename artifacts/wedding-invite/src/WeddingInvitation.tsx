@@ -81,28 +81,28 @@ const Petals = () => {
 const CornerOrnaments = () => (
   <>
     <svg className="absolute top-2 left-2 w-14 h-14 text-[#D4AF37] opacity-80" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
-       <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
-       <circle cx="50" cy="50" r="4" fill="currentColor" />
-       <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
-       <circle cx="10" cy="10" r="3" fill="currentColor" />
+      <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="50" cy="50" r="4" fill="currentColor" />
+      <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
+      <circle cx="10" cy="10" r="3" fill="currentColor" />
     </svg>
     <svg className="absolute top-2 right-2 w-14 h-14 text-[#D4AF37] opacity-80 rotate-90" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
-       <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
-       <circle cx="50" cy="50" r="4" fill="currentColor" />
-       <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
-       <circle cx="10" cy="10" r="3" fill="currentColor" />
+      <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="50" cy="50" r="4" fill="currentColor" />
+      <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
+      <circle cx="10" cy="10" r="3" fill="currentColor" />
     </svg>
     <svg className="absolute bottom-2 right-2 w-14 h-14 text-[#D4AF37] opacity-80 rotate-180" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
-       <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
-       <circle cx="50" cy="50" r="4" fill="currentColor" />
-       <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
-       <circle cx="10" cy="10" r="3" fill="currentColor" />
+      <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="50" cy="50" r="4" fill="currentColor" />
+      <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
+      <circle cx="10" cy="10" r="3" fill="currentColor" />
     </svg>
     <svg className="absolute bottom-2 left-2 w-14 h-14 text-[#D4AF37] opacity-80 -rotate-90" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
-       <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
-       <circle cx="50" cy="50" r="4" fill="currentColor" />
-       <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
-       <circle cx="10" cy="10" r="3" fill="currentColor" />
+      <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="50" cy="50" r="4" fill="currentColor" />
+      <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
+      <circle cx="10" cy="10" r="3" fill="currentColor" />
     </svg>
   </>
 );
@@ -222,12 +222,12 @@ export default function WeddingInvitation() {
       {/* ENVELOPE ENTRY SCREEN */}
       <AnimatePresence>
         {!showCard && (
-          <motion.div 
+          <motion.div
             className="fixed inset-0 flex flex-col items-center justify-center z-20 p-4 bg-gradient-to-b from-[#2A080E] via-[#3D0C14] to-[#2A080E]"
             exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.8 } }}
           >
             {/* Ambient Title */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               className="mb-8 text-center px-4"
@@ -258,59 +258,59 @@ export default function WeddingInvitation() {
 
               {/* Envelope box */}
               <div className="relative w-full aspect-[4/3] perspective-[1200px]">
-              {/* Back */}
-              <div className="absolute inset-0 bg-[#3D0C14] rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-[#D4AF37]/30" />
-              
-              {/* Inner Silk Pattern */}
-              <div className="absolute inset-1.5 bg-[#4A101A] rounded opacity-70 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:14px_14px]" />
+                {/* Back */}
+                <div className="absolute inset-0 bg-[#3D0C14] rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-[#D4AF37]/30" />
 
-              {/* Thumbnail Couple Portrait Card sliding out */}
-              <motion.div
-                className="absolute left-4 right-4 bottom-2 bg-[#FDF6E3] rounded-t-lg border-t-2 border-l-2 border-r-2 border-[#D4AF37] shadow-2xl flex flex-col items-center pt-3 px-3 pb-2 z-10 overflow-hidden"
-                initial={{ top: '25px' }}
-                animate={{ top: isOpen ? '-120px' : '25px' }}
-                transition={{ duration: 0.85, delay: 0.25, ease: 'easeOut' }}
-              >
-                <div className="w-full h-24 rounded overflow-hidden border border-[#D4AF37]/40 relative mb-2">
-                  <img src={coupleImg} onError={handleImageError} alt="M. Karthikeyan & K. Soundariya" className="w-full h-full object-cover object-top" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#3D0C14]/60 to-transparent" />
-                </div>
-                <p className="font-serif text-[11px] text-[#6B1B2A] font-bold tracking-widest uppercase">M. Karthikeyan &amp; K. Soundariya</p>
-                <p className="text-[9px] text-[#D4AF37] tracking-wider uppercase font-semibold">Salem • Muhurtham</p>
-              </motion.div>
+                {/* Inner Silk Pattern */}
+                <div className="absolute inset-1.5 bg-[#4A101A] rounded opacity-70 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:14px_14px]" />
 
-              {/* Front Flaps */}
-              <div className="absolute inset-0 z-20 pointer-events-none drop-shadow-2xl overflow-hidden rounded-b-lg">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-[#4A101A]">
-                  <polygon points="0,100 50,48 100,100" fill="currentColor" stroke="#6B1B2A" strokeWidth="0.5" />
-                  <polygon points="0,0 50,48 0,100" fill="#3D0C14" stroke="#2A080E" strokeWidth="0.5" />
-                  <polygon points="100,0 50,48 100,100" fill="#3D0C14" stroke="#2A080E" strokeWidth="0.5" />
-                </svg>
-              </div>
-
-              {/* Top Flap */}
-              <motion.div
-                className="absolute top-0 left-0 w-full h-[62%] origin-top z-30 drop-shadow-2xl"
-                initial={{ rotateX: 0 }}
-                animate={{ rotateX: isOpen ? -180 : 0, zIndex: isOpen ? 5 : 30 }}
-                transition={{ duration: 0.85, ease: 'easeInOut' }}
-              >
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-[#5A1421]">
-                  <polygon points="0,0 100,0 50,100" fill="currentColor" stroke="#7A1F30" strokeWidth="0.5" />
-                </svg>
-                
-                {/* Royal Wax Seal */}
-                <motion.div 
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.6)] flex items-center justify-center border-2 border-[#FFE89C] bg-gradient-to-br from-[#D4AF37] via-[#AA8022] to-[#6A4E00]"
-                  animate={{ opacity: isOpen ? 0 : 1, scale: isOpen ? 0.8 : 1 }}
-                  transition={{ duration: 0.3 }}
+                {/* Thumbnail Couple Portrait Card sliding out */}
+                <motion.div
+                  className="absolute left-4 right-4 bottom-2 bg-[#FDF6E3] rounded-t-lg border-t-2 border-l-2 border-r-2 border-[#D4AF37] shadow-2xl flex flex-col items-center pt-3 px-3 pb-2 z-10 overflow-hidden"
+                  initial={{ top: '25px' }}
+                  animate={{ top: isOpen ? '-120px' : '25px' }}
+                  transition={{ duration: 0.85, delay: 0.25, ease: 'easeOut' }}
                 >
-                  <div className="w-[88%] h-[88%] rounded-full border border-[#FFE89C]/40 flex flex-col items-center justify-center bg-gradient-to-br from-[#AA8022] via-[#D4AF37] to-[#805F10] shadow-inner">
-                    <span className="font-cinzel text-[#FFE89C] text-sm font-bold tracking-tighter drop-shadow">K &amp; S</span>
-                    <span className="text-[7px] text-[#FFE89C]/80 font-serif">07.09.26</span>
+                  <div className="w-full h-24 rounded overflow-hidden border border-[#D4AF37]/40 relative mb-2">
+                    <img src={coupleImg} onError={handleImageError} alt="M. Karthikeyan & K. Soundariya" className="w-full h-full object-cover object-top" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#3D0C14]/60 to-transparent" />
                   </div>
+                  <p className="font-serif text-[11px] text-[#6B1B2A] font-bold tracking-widest uppercase">M. Karthikeyan &amp; K. Soundariya</p>
+                  <p className="text-[9px] text-[#D4AF37] tracking-wider uppercase font-semibold">Salem • Muhurtham</p>
                 </motion.div>
-              </motion.div>
+
+                {/* Front Flaps */}
+                <div className="absolute inset-0 z-20 pointer-events-none drop-shadow-2xl overflow-hidden rounded-b-lg">
+                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-[#4A101A]">
+                    <polygon points="0,100 50,48 100,100" fill="currentColor" stroke="#6B1B2A" strokeWidth="0.5" />
+                    <polygon points="0,0 50,48 0,100" fill="#3D0C14" stroke="#2A080E" strokeWidth="0.5" />
+                    <polygon points="100,0 50,48 100,100" fill="#3D0C14" stroke="#2A080E" strokeWidth="0.5" />
+                  </svg>
+                </div>
+
+                {/* Top Flap */}
+                <motion.div
+                  className="absolute top-0 left-0 w-full h-[62%] origin-top z-30 drop-shadow-2xl"
+                  initial={{ rotateX: 0 }}
+                  animate={{ rotateX: isOpen ? -180 : 0, zIndex: isOpen ? 5 : 30 }}
+                  transition={{ duration: 0.85, ease: 'easeInOut' }}
+                >
+                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-[#5A1421]">
+                    <polygon points="0,0 100,0 50,100" fill="currentColor" stroke="#7A1F30" strokeWidth="0.5" />
+                  </svg>
+
+                  {/* Royal Wax Seal */}
+                  <motion.div
+                    className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.6)] flex items-center justify-center border-2 border-[#FFE89C] bg-gradient-to-br from-[#D4AF37] via-[#AA8022] to-[#6A4E00]"
+                    animate={{ opacity: isOpen ? 0 : 1, scale: isOpen ? 0.8 : 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="w-[88%] h-[88%] rounded-full border border-[#FFE89C]/40 flex flex-col items-center justify-center bg-gradient-to-br from-[#AA8022] via-[#D4AF37] to-[#805F10] shadow-inner">
+                      <span className="font-cinzel text-[#FFE89C] text-sm font-bold tracking-tighter drop-shadow">K &amp; S</span>
+                      <span className="text-[7px] text-[#FFE89C]/80 font-serif">07.09.26</span>
+                    </div>
+                  </motion.div>
+                </motion.div>
               </div>{/* end envelope box */}
             </div>{/* end envelope wrapper */}
 
@@ -335,7 +335,7 @@ export default function WeddingInvitation() {
       {/* MAIN INVITATION CARD DISPLAY */}
       <AnimatePresence>
         {showCard && (
-          <motion.div 
+          <motion.div
             className="relative z-20 w-full max-w-[520px] mx-auto min-h-screen py-6 px-3 sm:px-4 flex flex-col items-center"
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
@@ -346,7 +346,7 @@ export default function WeddingInvitation() {
               <div className="w-full h-full border-[1.5px] border-[#D4AF37] relative px-4 sm:px-8 py-10 sm:py-12 flex flex-col items-center rounded bg-gradient-to-b from-[#FFFDF7] via-[#FDF6E3] to-[#FFFDF7]">
                 <CornerOrnaments />
 
-                <motion.div 
+                <motion.div
                   initial="hidden"
                   animate="visible"
                   variants={{
@@ -383,15 +383,15 @@ export default function WeddingInvitation() {
                       {/* Luxury Golden Ornate Frame */}
                       <div className="relative rounded-2xl overflow-hidden p-2.5 bg-gradient-to-b from-[#FFE89C] via-[#D4AF37] to-[#AA8022] shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:scale-[1.02]">
                         <div className="relative rounded-xl overflow-hidden border-2 border-[#FFE89C]">
-                          <img 
-                            src={coupleImg} 
+                          <img
+                            src={coupleImg}
                             onError={handleImageError}
-                            alt="M. Karthikeyan & K. Soundariya" 
+                            alt="M. Karthikeyan & K. Soundariya"
                             className="w-full h-auto object-cover max-h-[520px] rounded-xl shadow-inner"
                           />
                           {/* Soft Vignette & Light Overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-[#2A080E]/60 via-transparent to-transparent pointer-events-none" />
-                          
+
                           {/* Zoom Icon Hint */}
                           <div className="absolute bottom-3 right-3 bg-[#3D0C14]/80 text-[#FFE89C] p-2 rounded-full backdrop-blur-md opacity-90 group-hover:scale-110 transition-transform border border-[#D4AF37]">
                             <ZoomIn className="w-4 h-4" />
@@ -465,7 +465,7 @@ export default function WeddingInvitation() {
                   {/* 6. EVENT & VENUE DETAILS CARD */}
                   <motion.div variants={sectionVariants} className="w-full bg-[#FFFDF7] border-2 border-[#D4AF37] p-5 sm:p-6 rounded-xl my-6 shadow-[0_8px_25px_rgba(212,175,55,0.15)] relative text-left">
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#D4AF37] via-[#FFE89C] to-[#D4AF37]" />
-                    
+
                     <div className="text-center mb-5">
                       <h3 className="font-cinzel text-lg text-[#6B1B2A] font-bold tracking-wider uppercase">Auspicious Ceremony</h3>
                       <div className="w-16 h-[1px] bg-[#D4AF37] mx-auto mt-1" />
@@ -544,7 +544,7 @@ export default function WeddingInvitation() {
                       {/* Groom Parents */}
                       <div className="bg-[#FFFDF7] border border-[#D4AF37]/60 p-4 rounded-lg shadow-sm text-center sm:text-right">
                         <h3 className="font-cinzel font-bold text-[#6B1B2A] text-sm mb-2 border-b border-[#D4AF37]/30 pb-1">Groom's Parents</h3>
-                        <p className="text-sm font-bold text-[#5A1421]">Mr. N. R. Magenthiran</p>
+                        <p className="text-sm font-bold text-[#5A1421]">Mr. N. R. Magendiran</p>
                         <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">B.Com., CAIIB • Chief Manager (Retd.), IOB</p>
                         <p className="text-sm font-bold text-[#5A1421]">Mrs. M. Shanthi</p>
                         <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">B.Sc.</p>
@@ -592,7 +592,7 @@ export default function WeddingInvitation() {
                     <p className="font-serif italic text-base sm:text-lg leading-relaxed mb-4 text-[#FFE89C]/90">
                       "We warmly invite you to grace this auspicious occasion with your presence and shower your blessings upon the couple as they embark on a beautiful journey of togetherness."
                     </p>
-                    
+
                     {/* Interactive RSVP & Share buttons */}
                     <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
                       <button
@@ -633,21 +633,21 @@ export default function WeddingInvitation() {
       {/* FULLSCREEN IMAGE ZOOM MODAL */}
       <AnimatePresence>
         {isZoomed && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-4 backdrop-blur-md"
             onClick={() => setIsZoomed(false)}
           >
-            <button 
+            <button
               onClick={() => setIsZoomed(false)}
               className="absolute top-4 right-4 text-[#FFE89C] bg-[#4A101A] p-2.5 rounded-full border border-[#D4AF37]"
             >
               <X className="w-6 h-6" />
             </button>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
