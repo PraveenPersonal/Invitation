@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, MapPin, Moon, Heart, Volume2, VolumeX, Sparkles, Navigation, CheckCircle2, Send, Share2, ZoomIn, X, Phone } from 'lucide-react';
+import { Calendar, Clock, MapPin, Moon, Heart, Sparkles, Navigation, CheckCircle2, Send, Share2, ZoomIn, X, Phone } from 'lucide-react';
 import coupleImg from './assets/couple.png';
+import flowerImg from './assets/flowers.png';
 
 const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
   const target = e.currentTarget;
@@ -134,14 +135,11 @@ const sectionVariants = {
 export default function WeddingInvitation() {
   const [isOpen, setIsOpen] = useState(false);
   const [showCard, setShowCard] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const [showRsvpModal, setShowRsvpModal] = useState(false);
   const [guestName, setGuestName] = useState('');
   const [blessingMsg, setBlessingMsg] = useState('');
   const [blessingSubmitted, setBlessingSubmitted] = useState(false);
-  const audioRef = useRef<AudioContext | null>(null);
-  const oscRef = useRef<OscillatorNode | null>(null);
 
   // Countdown timer state
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -168,44 +166,6 @@ export default function WeddingInvitation() {
     return () => clearInterval(timer);
   }, []);
 
-  const toggleAudio = () => {
-    if (!isPlaying) {
-      try {
-        const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-        const ctx = new AudioCtx();
-        audioRef.current = ctx;
-
-        // Create harmonic ambient chime note (Sa-Pa tanpura drone effect)
-        const osc1 = ctx.createOscillator();
-        const osc2 = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc1.type = 'sine';
-        osc1.frequency.setValueAtTime(220, ctx.currentTime); // A3 (Sa)
-        osc2.type = 'sine';
-        osc2.frequency.setValueAtTime(330, ctx.currentTime); // E4 (Pa)
-
-        gain.gain.setValueAtTime(0.08, ctx.currentTime);
-
-        osc1.connect(gain);
-        osc2.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc1.start();
-        osc2.start();
-        oscRef.current = osc1;
-        setIsPlaying(true);
-      } catch {
-        setIsPlaying(false);
-      }
-    } else {
-      if (audioRef.current) {
-        audioRef.current.close();
-        audioRef.current = null;
-      }
-      setIsPlaying(false);
-    }
-  };
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -258,14 +218,6 @@ export default function WeddingInvitation() {
     <div className="min-h-[100dvh] w-full bg-[#2A080E] overflow-x-hidden relative font-sans text-center text-[#5A1421] selection:bg-[#D4AF37]/30 selection:text-[#FFE89C]">
       <Petals />
 
-      {/* Floating Audio Control Button */}
-      <button
-        onClick={toggleAudio}
-        className="fixed top-4 right-4 z-50 w-11 h-11 rounded-full bg-[#4A101A]/90 border border-[#D4AF37] text-[#FFE89C] flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all backdrop-blur-md"
-        title={isPlaying ? "Mute Ambient Sound" : "Play Ambient Sound"}
-      >
-        {isPlaying ? <Volume2 className="w-5 h-5 animate-pulse text-[#D4AF37]" /> : <VolumeX className="w-5 h-5 opacity-70" />}
-      </button>
 
       {/* ENVELOPE ENTRY SCREEN */}
       <AnimatePresence>
@@ -288,7 +240,24 @@ export default function WeddingInvitation() {
             </motion.div>
 
             {/* The Royal Envelope */}
-            <div className="relative w-full max-w-[360px] aspect-[4/3] perspective-[1200px] mb-8">
+            <div className="relative w-full max-w-[380px] mb-8 pb-10">
+              {/* Flower Bouquet — Left */}
+              <img
+                src={flowerImg}
+                alt=""
+                className="absolute -left-16 -bottom-5 w-36 h-36 object-contain opacity-90 pointer-events-none select-none z-10"
+                style={{ transform: 'scaleX(-1) rotate(-15deg)' }}
+              />
+              {/* Flower Bouquet — Right */}
+              <img
+                src={flowerImg}
+                alt=""
+                className="absolute -right-16 -bottom-5 w-36 h-36 object-contain opacity-90 pointer-events-none select-none z-10"
+                style={{ transform: 'rotate(15deg)' }}
+              />
+
+              {/* Envelope box */}
+              <div className="relative w-full aspect-[4/3] perspective-[1200px]">
               {/* Back */}
               <div className="absolute inset-0 bg-[#3D0C14] rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-[#D4AF37]/30" />
               
@@ -342,7 +311,8 @@ export default function WeddingInvitation() {
                   </div>
                 </motion.div>
               </motion.div>
-            </div>
+              </div>{/* end envelope box */}
+            </div>{/* end envelope wrapper */}
 
             {/* Tap to Open Button */}
             {!isOpen && (
