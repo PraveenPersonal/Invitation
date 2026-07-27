@@ -280,7 +280,7 @@ export default function WeddingInvitation() {
                   {/* 5. Parents */}
                   <motion.div variants={sectionVariants} className="w-full mb-10 relative">
                     <div className="text-center mb-6">
-                      <h2 className="font-serif text-xl text-[#C9A84C] italic">Bride &amp; Groom of</h2>
+                      <h2 className="font-serif text-xl text-[#C9A84C] italic">Family</h2>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 relative z-10">
                       <div className="text-center sm:text-right sm:pr-6">
@@ -335,7 +335,7 @@ export default function WeddingInvitation() {
                   <motion.div variants={sectionVariants} className="flex flex-col items-center">
                     <LargeFloralDivider />
                     <p className="mt-6 font-serif text-[#C9A84C] text-lg sm:text-xl italic">
-                      With love &amp; warmth, Both families
+                      With love &amp; warmth, Karthikeyan &amp; Soundariya
                     </p>
                   </motion.div>
 
