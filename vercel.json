@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd $(git rev-parse --show-toplevel) && npm run build --prefix artifacts/wedding-invite",
+  "installCommand": "cd $(git rev-parse --show-toplevel) && npm install --prefix artifacts/wedding-invite",
+  "outputDirectory": "../wedding-invite/dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

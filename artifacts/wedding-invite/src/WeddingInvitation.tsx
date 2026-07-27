@@ -1,27 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, MapPin, Moon } from 'lucide-react';
+import { Calendar, Clock, MapPin, Moon, Heart, Sparkles, Navigation, CheckCircle2, Send, Share2, ZoomIn, X, Phone } from 'lucide-react';
+import coupleImg from './assets/couple.png';
+import flowerImg from './assets/flowers.png';
+import cardBg from './assets/card_bg.png';
+
+const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const target = e.currentTarget;
+  if (!target.dataset.fallbackCount) {
+    target.dataset.fallbackCount = '1';
+    target.src = '/couple.png';
+  } else if (target.dataset.fallbackCount === '1') {
+    target.dataset.fallbackCount = '2';
+    target.src = '/couple.jpg';
+  }
+};
 
 const Petals = () => {
   return (
     <>
       <style>{`
         @keyframes floatDown {
-          0% { transform: translate(0, -10vh) rotate(0deg); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translate(var(--tx), 110vh) rotate(var(--rot)); opacity: 0; }
+          0% { transform: translate(0, -10vh) rotate(0deg) scale(0.8); opacity: 0; }
+          15% { opacity: 0.8; }
+          85% { opacity: 0.8; }
+          100% { transform: translate(var(--tx), 110vh) rotate(var(--rot)) scale(1.1); opacity: 0; }
         }
         .petal {
           position: fixed;
           top: -20px;
-          z-index: 0;
+          z-index: 1;
           pointer-events: none;
           animation: floatDown var(--duration) linear infinite;
           animation-delay: var(--delay);
+          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
         }
         .shimmer-button {
-          background: linear-gradient(90deg, #C9A84C 0%, #FDF6E3 50%, #C9A84C 100%);
+          background: linear-gradient(90deg, #D4AF37 0%, #FFE89C 30%, #D4AF37 60%, #AA8022 100%);
           background-size: 200% auto;
           animation: shimmer 3s linear infinite;
         }
@@ -29,306 +44,519 @@ const Petals = () => {
           0% { background-position: -200% center; }
           100% { background-position: 200% center; }
         }
+        .royal-glow {
+          box-shadow: 0 10px 30px -5px rgba(212, 175, 55, 0.3), 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+        .gold-border-ornate {
+          border: 2px solid;
+          border-image: linear-gradient(to bottom right, #FFE89C, #D4AF37, #AA8022, #F5E08F) 1;
+        }
       `}</style>
-      {Array.from({ length: 20 }).map((_, i) => (
-        <svg
-          key={i}
-          className="petal text-[#C9A84C]/40"
-          style={{
-            left: `${Math.random() * 100}vw`,
-            '--duration': `${10 + Math.random() * 10}s`,
-            '--delay': `-${Math.random() * 10}s`,
-            '--tx': `${(Math.random() - 0.5) * 200}px`,
-            '--rot': `${(Math.random() > 0.5 ? 1 : -1) * 360}deg`,
-            width: `${10 + Math.random() * 15}px`,
-            height: `${10 + Math.random() * 15}px`,
-          } as React.CSSProperties}
-          viewBox="0 0 24 24"
-          fill="currentColor"
-        >
-          <path d="M12 2C8 2 4 6 4 12c0 6 8 10 8 10s8-4 8-10c0-6-4-10-8-10z" />
-        </svg>
-      ))}
+      {Array.from({ length: 24 }).map((_, i) => {
+        const isGold = i % 3 === 0;
+        const color = isGold ? 'text-[#D4AF37]/50' : i % 2 === 0 ? 'text-[#E63946]/40' : 'text-[#FB8500]/40';
+        return (
+          <svg
+            key={i}
+            className={`petal ${color}`}
+            style={{
+              left: `${Math.random() * 100}vw`,
+              '--duration': `${12 + Math.random() * 10}s`,
+              '--delay': `-${Math.random() * 12}s`,
+              '--tx': `${(Math.random() - 0.5) * 220}px`,
+              '--rot': `${(Math.random() > 0.5 ? 1 : -1) * 360}deg`,
+              width: `${12 + Math.random() * 16}px`,
+              height: `${12 + Math.random() * 16}px`,
+            } as React.CSSProperties}
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M12 2C8 2 4 6 4 12c0 6 8 10 8 10s8-4 8-10c0-6-4-10-8-10z" />
+          </svg>
+        );
+      })}
     </>
   );
 };
 
 const CornerOrnaments = () => (
   <>
-    <svg className="absolute top-2 left-2 w-12 h-12 text-[#C9A84C] opacity-70" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
-       <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.2" />
-       <circle cx="50" cy="50" r="4" fill="currentColor" />
-       <path d="M10 10 L 35 10 M10 10 L 10 35" />
+    <svg className="absolute top-2 left-2 w-14 h-14 text-[#D4AF37] opacity-80" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="50" cy="50" r="4" fill="currentColor" />
+      <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
+      <circle cx="10" cy="10" r="3" fill="currentColor" />
     </svg>
-    <svg className="absolute top-2 right-2 w-12 h-12 text-[#C9A84C] opacity-70 rotate-90" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
-       <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.2" />
-       <circle cx="50" cy="50" r="4" fill="currentColor" />
-       <path d="M10 10 L 35 10 M10 10 L 10 35" />
+    <svg className="absolute top-2 right-2 w-14 h-14 text-[#D4AF37] opacity-80 rotate-90" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="50" cy="50" r="4" fill="currentColor" />
+      <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
+      <circle cx="10" cy="10" r="3" fill="currentColor" />
     </svg>
-    <svg className="absolute bottom-2 right-2 w-12 h-12 text-[#C9A84C] opacity-70 rotate-180" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
-       <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.2" />
-       <circle cx="50" cy="50" r="4" fill="currentColor" />
-       <path d="M10 10 L 35 10 M10 10 L 10 35" />
+    <svg className="absolute bottom-2 right-2 w-14 h-14 text-[#D4AF37] opacity-80 rotate-180" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="50" cy="50" r="4" fill="currentColor" />
+      <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
+      <circle cx="10" cy="10" r="3" fill="currentColor" />
     </svg>
-    <svg className="absolute bottom-2 left-2 w-12 h-12 text-[#C9A84C] opacity-70 -rotate-90" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
-       <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.2" />
-       <circle cx="50" cy="50" r="4" fill="currentColor" />
-       <path d="M10 10 L 35 10 M10 10 L 10 35" />
+    <svg className="absolute bottom-2 left-2 w-14 h-14 text-[#D4AF37] opacity-80 -rotate-90" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M10 10 Q 50 10 50 50 Q 50 90 90 90 Q 50 90 50 50 Q 50 10 10 10 Z" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="50" cy="50" r="4" fill="currentColor" />
+      <path d="M10 10 L 40 10 M10 10 L 10 40" strokeWidth="2.5" />
+      <circle cx="10" cy="10" r="3" fill="currentColor" />
     </svg>
   </>
 );
 
 const LotusDivider = () => (
-  <svg className="w-40 h-6 text-[#C9A84C]" viewBox="0 0 200 30" fill="none" stroke="currentColor" strokeWidth="1">
-    <line x1="0" y1="15" x2="70" y2="15" />
-    <line x1="130" y1="15" x2="200" y2="15" />
-    <path d="M100 5 C110 5 120 15 100 25 C80 15 90 5 100 5 Z" fill="currentColor" fillOpacity="0.3" />
-    <path d="M100 10 C105 10 110 15 100 20 C90 15 95 10 100 10 Z" fill="currentColor" />
-    <circle cx="75" cy="15" r="2" fill="currentColor" />
-    <circle cx="125" cy="15" r="2" fill="currentColor" />
+  <svg className="w-48 h-7 text-[#D4AF37]" viewBox="0 0 200 30" fill="none" stroke="currentColor" strokeWidth="1.2">
+    <line x1="0" y1="15" x2="65" y2="15" />
+    <line x1="135" y1="15" x2="200" y2="15" />
+    <path d="M100 3 C112 3 124 14 100 27 C76 14 88 3 100 3 Z" fill="currentColor" fillOpacity="0.25" />
+    <path d="M100 8 C107 8 114 14 100 22 C86 14 93 8 100 8 Z" fill="currentColor" fillOpacity="0.6" />
+    <circle cx="100" cy="15" r="2.5" fill="#FFE89C" />
+    <circle cx="70" cy="15" r="2" fill="currentColor" />
+    <circle cx="130" cy="15" r="2" fill="currentColor" />
   </svg>
 );
 
-const LargeFloralDivider = () => (
-  <svg className="w-64 h-8 text-[#C9A84C]" viewBox="0 0 300 50" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <path d="M0 25 Q 50 0 100 25 T 200 25 T 300 25" fill="none" />
-    <path d="M0 25 Q 50 50 100 25 T 200 25 T 300 25" fill="none" opacity="0.3" />
-    <circle cx="150" cy="25" r="5" fill="currentColor" />
-    <path d="M150 10 L 154 18 L 162 18 L 156 22 L 158 30 L 150 25 L 142 30 L 144 22 L 138 18 L 146 18 Z" fill="currentColor" />
-  </svg>
+const SectionDivider = () => (
+  <div className="flex items-center justify-center my-6 w-full gap-3 opacity-90">
+    <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent" />
+    <span className="text-[#D4AF37] font-serif text-sm">✦ ॐ ✦</span>
+    <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent" />
+  </div>
 );
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  hidden: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
 };
 
 export default function WeddingInvitation() {
   const [isOpen, setIsOpen] = useState(false);
   const [showCard, setShowCard] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [showRsvpModal, setShowRsvpModal] = useState(false);
+  const [guestName, setGuestName] = useState('');
+  const [blessingMsg, setBlessingMsg] = useState('');
+  const [blessingSubmitted, setBlessingSubmitted] = useState(false);
+
+  // Countdown timer state
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const weddingDate = new Date('2026-09-07T09:00:00+05:30').getTime();
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = weddingDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
   }, []);
+
 
   const handleOpen = () => {
     setIsOpen(true);
     setTimeout(() => {
       setShowCard(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1200);
+    }, 1100);
+  };
+
+  const handleGoogleCalendar = () => {
+    const title = encodeURIComponent("Wedding: M. Karthikeyan & K. Soundariya");
+    const details = encodeURIComponent("You are cordially invited to the wedding ceremony of M. Karthikeyan & K. Soundariya.");
+    const location = encodeURIComponent("Kongu Vellala Goundar Thirumana Mandapam, Cuddalore Main Road, Ammapet, Salem");
+    const dates = "20260907T033000Z/20260907T043000Z";
+    window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`, '_blank');
+  };
+
+  const handleMaps = () => {
+    const venue = encodeURIComponent("M662+RGX, Kamarajar Nagar Colony, Ammapet, Salem (M.Corp.), Tamil Nadu 636014");
+    window.open(`https://www.google.com/maps/search/?api=1&query=${venue}`, '_blank');
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Wedding Invitation — M. Karthikeyan & K. Soundariya',
+          text: 'You are cordially invited to the wedding of M. Karthikeyan & K. Soundariya on 07 September 2026 in Salem.',
+          url: window.location.href,
+        });
+      } catch {
+        // Fallback copy
+        navigator.clipboard.writeText(window.location.href);
+        alert('Invitation link copied to clipboard!');
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('Invitation link copied to clipboard!');
+    }
+  };
+
+  const submitBlessing = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (guestName.trim()) {
+      setBlessingSubmitted(true);
+    }
   };
 
   return (
-    <div className="min-h-[100dvh] w-full bg-[#3D0C14] overflow-x-hidden relative font-sans text-center text-[#5A1421]">
+    <div className="min-h-[100dvh] w-full overflow-x-hidden relative font-sans text-center">
       <Petals />
-      
+
+
+      {/* ENVELOPE ENTRY SCREEN */}
       <AnimatePresence>
         {!showCard && (
-          <motion.div 
-            className="fixed inset-0 flex flex-col items-center justify-center z-10 p-4"
-            exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.8 } }}
+          <motion.div
+            className="fixed inset-0 flex flex-col items-center justify-center z-30 p-4 sm:p-6 overflow-y-auto text-center select-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.8 } }}
           >
-            {/* The Envelope */}
-            <div className="relative w-full max-w-[340px] aspect-[4/3] perspective-[1200px] mb-12">
-              {/* Back */}
-              <div className="absolute inset-0 bg-[#4A101A] rounded-lg shadow-2xl" />
-              
-              {/* Inner Pattern */}
-              <div className="absolute inset-1 bg-[#5A1421] rounded opacity-50 bg-[radial-gradient(#C9A84C_1px,transparent_1px)] [background-size:12px_12px]" />
+            {/* Centered Content Wrapper */}
+            <div className="my-auto w-full max-w-sm sm:max-w-md flex flex-col items-center justify-center space-y-5 sm:space-y-6 px-2 py-4">
 
-              {/* Thumbnail Card sliding out */}
+              {/* Ambient Header */}
               <motion.div
-                className="absolute left-4 right-4 bottom-2 bg-[#FDF6E3] rounded-t-md border-t border-l border-r border-[#C9A84C] shadow-lg flex flex-col items-center pt-6 z-10"
-                initial={{ top: '20px' }}
-                animate={{ top: isOpen ? '-100px' : '20px' }}
-                transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
-              >
-                <div className="w-10 h-10 rounded-full border border-[#C9A84C] mb-3 flex items-center justify-center">
-                  <span className="font-serif text-[#C9A84C] text-[10px]">ॐ</span>
-                </div>
-                <div className="w-20 h-[1px] bg-[#C9A84C] mb-2" />
-                <div className="w-32 h-[1px] bg-[#C9A84C]" />
-              </motion.div>
-
-              {/* Front Flaps */}
-              <div className="absolute inset-0 z-20 pointer-events-none drop-shadow-xl overflow-hidden rounded-b-lg">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-[#6B1B2A]">
-                  <polygon points="0,100 50,45 100,100" fill="currentColor" stroke="#812234" strokeWidth="0.5" />
-                  <polygon points="0,0 50,45 0,100" fill="#5A1421" stroke="#4A101A" strokeWidth="0.5" />
-                  <polygon points="100,0 50,45 100,100" fill="#5A1421" stroke="#4A101A" strokeWidth="0.5" />
-                </svg>
-              </div>
-
-              {/* Top Flap */}
-              <motion.div
-                className="absolute top-0 left-0 w-full h-[60%] origin-top z-30 drop-shadow-2xl"
-                initial={{ rotateX: 0 }}
-                animate={{ rotateX: isOpen ? -180 : 0, zIndex: isOpen ? 5 : 30 }}
-                transition={{ duration: 0.8, ease: 'easeInOut' }}
-              >
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-[#7A1F30]">
-                  <polygon points="0,0 100,0 50,100" fill="currentColor" stroke="#812234" strokeWidth="0.5" />
-                </svg>
-                
-                {/* Wax Seal */}
-                <motion.div 
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-14 h-14 rounded-full shadow-lg flex items-center justify-center border border-[#E8D385] bg-gradient-to-br from-[#D4AF37] to-[#AA8022]"
-                  animate={{ opacity: isOpen ? 0 : 1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="w-[85%] h-[85%] rounded-full border border-[#5A1421]/20 flex items-center justify-center bg-gradient-to-br from-[#C9A84C] to-[#B89635]">
-                    <span className="font-serif text-[#5A1421] text-xl font-bold tracking-tighter">K&S</span>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </div>
-
-            {/* Open Button */}
-            {!isOpen && (
-              <motion.button
-                onClick={handleOpen}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="shimmer-button px-8 py-3 rounded-full text-[#5A1421] font-serif font-bold tracking-widest uppercase shadow-lg shadow-[#C9A84C]/20 hover:scale-105 active:scale-95 transition-transform border border-[#C9A84C]/50"
+                transition={{ duration: 0.6 }}
+                className="flex flex-col items-center"
               >
-                Open Invitation
-              </motion.button>
-            )}
+                <p className="font-serif italic text-[#D4AF37] text-xl sm:text-2xl tracking-widest">
+                  Wedding Invitation
+                </p>
+              </motion.div>
+
+              {/* The Royal Envelope Card Cover */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.15 }}
+                className="relative w-full max-w-[450px] sm:max-w-[480px] aspect-[2/3]   rounded-2xl cursor-pointer royal-glow group"
+                onClick={handleOpen}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {/* Parchment background texture */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90 pointer-events-none z-0"
+                  style={{ backgroundImage: `url(${cardBg})` }}
+                />
+
+                {/* Center Content Box inside Envelope */}
+                <div className="relative z-20 w-full h-full flex flex-col items-center justify-center p-2 text-center">
+                  <div className="w-full px-3 sm:px-4 py-4 sm:py-5  rounded-xl shadow-inner flex flex-col items-center space-y-2">
+                    <p className="text-xs font-serif italic text-[#800020] tracking-wider uppercase">Save The Date</p>
+
+                    <LotusDivider />
+
+                    <div className="py-1">
+                      <p className="font-cinzel text-base sm:text-lg text-[#4A101A] font-bold uppercase tracking-wider drop-shadow-sm leading-tight">
+                        M. Karthikeyan
+                      </p>
+                      <span className="font-script text-3xl text-[#D4AF37] lowercase font-normal my-0.5 inline-block">&amp;</span>
+                      <p className="font-cinzel text-base sm:text-lg text-[#4A101A] font-bold uppercase tracking-wider drop-shadow-sm leading-tight">
+                        K. Soundariya
+                      </p>
+                    </div>
+
+                    <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent my-0.5" />
+
+                    <p className="text-[11px] font-cinzel font-semibold tracking-widest text-[#6B1B2A] uppercase">
+                      Monday • 07 Sep 2026
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Tap to Open CTA Button */}
+              {!isOpen && (
+                <motion.button
+                  onClick={handleOpen}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 }}
+                  className="shimmer-button px-8 py-3.5 rounded-full text-[#3D0C14] font-cinzel font-bold text-sm tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.45)] hover:scale-105 active:scale-95 transition-all border border-[#FFE89C]/80 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4 text-[#3D0C14] animate-pulse" />
+                  <span>Open Royal Invitation</span>
+                  <Sparkles className="w-4 h-4 text-[#3D0C14] animate-pulse" />
+                </motion.button>
+              )}
+
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
+      {/* MAIN INVITATION CARD DISPLAY */}
       <AnimatePresence>
         {showCard && (
-          <motion.div 
-            className="relative z-20 w-full max-w-[480px] mx-auto min-h-screen py-6 px-4 flex flex-col items-center"
-            initial={{ opacity: 0, y: 100 }}
+          <motion.div
+            className="relative z-20 w-full max-w-[520px] mx-auto min-h-screen py-6 px-3 sm:px-4 flex flex-col items-center"
+            initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="w-full bg-[#FDF6E3] shadow-2xl relative p-1 rounded-sm">
-              <div className="w-full h-full border-[1.5px] border-[#C9A84C] relative px-6 py-12 flex flex-col items-center">
+            {/* Card Container */}
+            <div className="w-full bg-[#FDF6E3] shadow-[0_20px_60px_rgba(0,0,0,0.6)] relative p-2 sm:p-3 rounded-lg border-2 border-[#D4AF37]/50 royal-glow">
+              <div className="w-full h-full border-[1.5px] border-[#D4AF37] relative px-4 sm:px-8 py-10 sm:py-12 flex flex-col items-center rounded bg-gradient-to-b from-[#FFFDF7] via-[#FDF6E3] to-[#FFFDF7]">
                 <CornerOrnaments />
 
-                <motion.div 
+                <motion.div
                   initial="hidden"
                   animate="visible"
                   variants={{
-                    visible: { transition: { staggerChildren: 0.15, delayChildren: 0.3 } }
+                    visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } }
                   }}
                   className="flex flex-col items-center w-full"
                 >
-                  {/* 1. Header */}
+                  {/* 1. Auspicious Invocation Header */}
                   <motion.div variants={sectionVariants} className="mb-6 flex flex-col items-center">
-                    <p className="font-sans italic text-[#C9A84C] text-sm font-semibold tracking-wide">
+                    <div className="w-12 h-12 rounded-full border-2 border-[#D4AF37] flex items-center justify-center bg-[#4A101A] text-[#FFE89C] shadow-md mb-2">
+                      <span className="font-serif text-2xl drop-shadow">ॐ</span>
+                    </div>
+                    <p className="font-serif italic text-[#9B2226] text-base font-semibold tracking-wider">
                       Sri Ganeshaya Namaha
                     </p>
-                    <div className="mt-3">
+                    <div className="mt-2">
                       <LotusDivider />
                     </div>
                   </motion.div>
 
-                  {/* 2. Opening */}
-                  <motion.div variants={sectionVariants} className="mb-10 text-center px-4">
-                    <p className="text-xs uppercase tracking-[0.2em] leading-relaxed text-[#6B1B2A]/80 font-medium">
-                      With the blessings of God and our families
+                  {/* 2. Opening Invitation Text */}
+                  <motion.div variants={sectionVariants} className="mb-6 text-center px-2">
+                    <p className="font-serif italic text-base text-[#6B1B2A] mb-1">
+                      Together with our families
+                    </p>
+                    <p className="text-xs uppercase tracking-[0.25em] leading-relaxed text-[#6B1B2A]/90 font-semibold font-cinzel">
+                      We cordially invite you to celebrate the auspicious marriage of
                     </p>
                   </motion.div>
 
-                  {/* 3. Couple */}
-                  <motion.div variants={sectionVariants} className="text-center mb-12 w-full">
-                    <h1 className="font-serif text-4xl sm:text-5xl text-[#6B1B2A] mb-2 drop-shadow-sm">M. Karthikeyan</h1>
-                    <p className="text-[10px] sm:text-xs text-[#6B1B2A]/80 uppercase tracking-wider mb-6 leading-relaxed max-w-[80%] mx-auto">
-                      B.E., MBA | Lead Software Engineer, Fidelity Investments, Chennai
-                    </p>
-                    
-                    <div className="flex justify-center items-center my-6">
-                      <span className="font-serif text-3xl sm:text-4xl text-[#C9A84C]">&amp;</span>
-                    </div>
+                  {/* 3. HERO SECTION: COUPLE PORTRAIT IMAGE */}
+                  <motion.div variants={sectionVariants} className="w-full my-4 flex flex-col items-center relative">
+                    <div className="relative group cursor-pointer max-w-[360px] w-full" onClick={() => setIsZoomed(true)}>
+                      {/* Luxury Golden Ornate Frame */}
+                      <div className="relative rounded-2xl overflow-hidden p-2.5 bg-gradient-to-b from-[#FFE89C] via-[#D4AF37] to-[#AA8022] shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:scale-[1.02]">
+                        <div className="relative rounded-xl overflow-hidden border-2 border-[#FFE89C]">
+                          <img
+                            src={coupleImg}
+                            onError={handleImageError}
+                            alt="M. Karthikeyan & K. Soundariya"
+                            className="w-full h-auto object-cover max-h-[520px] rounded-xl shadow-inner"
+                          />
+                          {/* Soft Vignette & Light Overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#2A080E]/60 via-transparent to-transparent pointer-events-none" />
 
-                    <h1 className="font-serif text-4xl sm:text-5xl text-[#6B1B2A] mb-2 drop-shadow-sm">K. Soundariya</h1>
-                    <p className="text-[10px] sm:text-xs text-[#6B1B2A]/80 uppercase tracking-wider leading-relaxed max-w-[80%] mx-auto">
-                      B.E. | Senior Software Engineer, TCS, Chennai
-                    </p>
-                  </motion.div>
+                          {/* Zoom Icon Hint */}
+                          <div className="absolute bottom-3 right-3 bg-[#3D0C14]/80 text-[#FFE89C] p-2 rounded-full backdrop-blur-md opacity-90 group-hover:scale-110 transition-transform border border-[#D4AF37]">
+                            <ZoomIn className="w-4 h-4" />
+                          </div>
 
-                  {/* 4. Details Box */}
-                  <motion.div variants={sectionVariants} className="w-full bg-[#FDF6E3] border border-[#C9A84C]/50 p-5 rounded mb-12 shadow-[inset_0_0_15px_rgba(201,168,76,0.1)] relative">
-                    <div className="absolute top-0 left-0 w-1 h-full bg-[#C9A84C]" />
-                    <div className="flex flex-col gap-4 text-[13px] sm:text-sm text-[#5A1421] pl-2">
-                      <div className="flex items-center gap-4">
-                        <Calendar className="w-5 h-5 text-[#C9A84C] shrink-0" strokeWidth={1.5} />
-                        <span className="font-semibold tracking-wide">Monday, 07 September 2026</span>
+                          <div className="absolute bottom-3 left-3 text-left">
+                            <p className="font-script text-2xl text-[#FFE89C] drop-shadow-md">Karthikeyan &amp; Soundariya</p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-4">
-                        <Clock className="w-5 h-5 text-[#C9A84C] shrink-0" strokeWidth={1.5} />
-                        <span className="tracking-wide">Muhurtham: 9:00 AM – 10:00 AM</span>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <Moon className="w-5 h-5 text-[#C9A84C] shrink-0" strokeWidth={1.5} />
-                        <span className="tracking-wide">Tamil Date: Aavani 21, 2026</span>
-                      </div>
-                      <div className="flex items-start gap-4">
-                        <MapPin className="w-5 h-5 text-[#C9A84C] mt-0.5 shrink-0" strokeWidth={1.5} />
-                        <span className="text-left leading-relaxed">Kongu Vellala Goundar Thirumana Mandapam, Cuddalore Main Road, Ammapet, Salem</span>
-                      </div>
+                      <p className="text-[10px] text-[#D4AF37] italic mt-2 tracking-wide font-serif">Tap image to view full portrait</p>
                     </div>
                   </motion.div>
 
-                  {/* 5. Parents */}
-                  <motion.div variants={sectionVariants} className="w-full mb-10 relative">
+                  {/* 4. COUPLE NAMES & QUALIFICATIONS */}
+                  <motion.div variants={sectionVariants} className="text-center my-6 w-full">
+                    {/* Groom */}
+                    <div className="mb-4">
+                      <h1 className="font-cinzel text-3xl sm:text-4xl text-[#6B1B2A] font-bold tracking-tight mb-1 drop-shadow-sm">
+                        M. Karthikeyan
+                      </h1>
+                      <p className="text-xs sm:text-sm font-serif font-bold text-[#D4AF37] tracking-wider uppercase mb-1">
+                        B.E., MBA
+                      </p>
+                      <p className="text-[11px] sm:text-xs text-[#5A1421]/90 uppercase tracking-widest font-semibold">
+                        Lead Software Engineer, Fidelity Investments, Chennai
+                      </p>
+                    </div>
+
+                    {/* Ampersand */}
+                    <div className="flex justify-center items-center my-3">
+                      <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D4AF37]" />
+                      <span className="font-script text-4xl sm:text-5xl text-[#D4AF37] px-4">&amp;</span>
+                      <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D4AF37]" />
+                    </div>
+
+                    {/* Bride */}
+                    <div className="mt-2">
+                      <h1 className="font-cinzel text-3xl sm:text-4xl text-[#6B1B2A] font-bold tracking-tight mb-1 drop-shadow-sm">
+                        K. Soundariya
+                      </h1>
+                      <p className="text-xs sm:text-sm font-serif font-bold text-[#D4AF37] tracking-wider uppercase mb-1">
+                        B.E.
+                      </p>
+                      <p className="text-[11px] sm:text-xs text-[#5A1421]/90 uppercase tracking-widest font-semibold">
+                        Senior Software Engineer, TCS, Chennai
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* <SectionDivider /> */}
+
+                  {/* 6. EVENT & VENUE DETAILS CARD */}
+                  <motion.div variants={sectionVariants} className="w-full bg-[#FFFDF7] border-2 border-[#D4AF37] p-5 sm:p-6 rounded-xl my-6 shadow-[0_8px_25px_rgba(212,175,55,0.15)] relative text-left">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#D4AF37] via-[#FFE89C] to-[#D4AF37]" />
+
+                    <div className="text-center mb-5">
+                      <h3 className="font-cinzel text-lg text-[#6B1B2A] font-bold tracking-wider uppercase">Auspicious Ceremony</h3>
+                      <div className="w-16 h-[1px] bg-[#D4AF37] mx-auto mt-1" />
+                    </div>
+
+                    <div className="flex flex-col gap-4 text-sm text-[#5A1421]">
+                      <div className="flex items-start gap-3.5">
+                        <div className="p-2 rounded-full bg-[#4A101A] text-[#FFE89C] shrink-0 mt-0.5 shadow-sm">
+                          <Calendar className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <p className="text-[11px] uppercase tracking-wider text-[#D4AF37] font-bold">Date</p>
+                          <p className="font-bold text-[#6B1B2A] text-base">Monday, 07 September 2026</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3.5">
+                        <div className="p-2 rounded-full bg-[#4A101A] text-[#FFE89C] shrink-0 mt-0.5 shadow-sm">
+                          <Clock className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <p className="text-[11px] uppercase tracking-wider text-[#D4AF37] font-bold">Muhurtham</p>
+                          <p className="font-bold text-[#6B1B2A] text-base">9:00 AM – 10:00 AM</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3.5">
+                        <div className="p-2 rounded-full bg-[#4A101A] text-[#FFE89C] shrink-0 mt-0.5 shadow-sm">
+                          <MapPin className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <p className="text-[11px] uppercase tracking-wider text-[#D4AF37] font-bold">Venue</p>
+                          <p className="font-bold text-[#6B1B2A]">Kongu Vellala Goundar Thirumana Mandapam</p>
+                          <p className="text-xs text-[#5A1421]/90 leading-relaxed mt-0.5">Cuddalore Main Road, Ammapet, Salem, Tamil Nadu</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons: Calendar & Map */}
+                    <div className="grid grid-cols-2 gap-3 mt-6 pt-4 border-t border-[#D4AF37]/30">
+                      <button
+                        onClick={handleGoogleCalendar}
+                        className="py-2.5 px-3 rounded-lg bg-[#4A101A] text-[#FFE89C] font-serif text-xs font-semibold flex items-center justify-center gap-1.5 shadow hover:bg-[#3D0C14] active:scale-95 transition-all border border-[#D4AF37]/60"
+                      >
+                        <Calendar className="w-3.5 h-3.5 text-[#D4AF37]" />
+                        Add to Calendar
+                      </button>
+
+                      <button
+                        onClick={handleMaps}
+                        className="py-2.5 px-3 rounded-lg bg-[#D4AF37] text-[#3D0C14] font-serif text-xs font-bold flex items-center justify-center gap-1.5 shadow hover:bg-[#FFE89C] active:scale-95 transition-all border border-[#AA8022]"
+                      >
+                        <Navigation className="w-3.5 h-3.5 text-[#3D0C14]" />
+                        Get Directions
+                      </button>
+                    </div>
+                  </motion.div>
+
+                  {/* 7. PARENTS & LINEAGE SECTION */}
+                  <motion.div variants={sectionVariants} className="w-full my-6">
                     <div className="text-center mb-6">
                       <h2 className="font-serif text-xl text-[#C9A84C] italic">Family</h2>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 relative z-10">
-                      <div className="text-center sm:text-right sm:pr-6">
-                        <h3 className="font-serif text-[#6B1B2A] text-lg mb-3">Groom's Parents</h3>
-                        <p className="text-sm font-bold text-[#5A1421]">Mr. N. R. Magenthiran</p>
-                        <p className="text-[10px] sm:text-[11px] text-[#5A1421]/80 mb-3 uppercase tracking-wide leading-relaxed">B.Com., CAIIB<br/>Chief Manager (Retd.), IOB</p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
+                      {/* Groom Parents */}
+                      <div className="bg-[#FFFDF7] border border-[#D4AF37]/60 p-4 rounded-lg shadow-sm text-center sm:text-right">
+                        <h3 className="font-cinzel font-bold text-[#6B1B2A] text-sm mb-2 border-b border-[#D4AF37]/30 pb-1">Groom's Parents</h3>
+                        <p className="text-sm font-bold text-[#5A1421]">Mr. N. R. Magendiran</p>
+                        <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">B.Com., CAIIB • Chief Manager (Retd.), IOB</p>
                         <p className="text-sm font-bold text-[#5A1421]">Mrs. M. Shanthi</p>
-                        <p className="text-[10px] sm:text-[11px] text-[#5A1421]/80 mb-3 uppercase tracking-wide">B.Sc.</p>
-                        <p className="text-[11px] text-[#C9A84C] font-semibold mt-1">Contact: 82208 32697</p>
+                        <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">B.Sc.</p>
+                        <a href="tel:+918220832697" className="inline-flex items-center gap-1.5 text-xs text-[#5A1421] font-sans hover:text-[#6B1B2A] transition-colors mt-1 font-medium">
+                          <Phone className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+                          <span>82208 32697</span>
+                        </a>
                       </div>
-                      
-                      <div className="hidden sm:block absolute top-10 bottom-0 left-1/2 w-[1px] bg-gradient-to-b from-transparent via-[#C9A84C]/40 to-transparent" />
 
-                      <div className="text-center sm:text-left sm:pl-6">
-                        <h3 className="font-serif text-[#6B1B2A] text-lg mb-3">Bride's Parents</h3>
+                      {/* Bride Parents */}
+                      <div className="bg-[#FFFDF7] border border-[#D4AF37]/60 p-4 rounded-lg shadow-sm text-center sm:text-left">
+                        <h3 className="font-cinzel font-bold text-[#6B1B2A] text-sm mb-2 border-b border-[#D4AF37]/30 pb-1">Bride's Parents</h3>
                         <p className="text-sm font-bold text-[#5A1421]">Mr. M. Kannan</p>
-                        <p className="text-[10px] sm:text-[11px] text-[#5A1421]/80 mb-3 uppercase tracking-wide leading-relaxed">AMK Jewel Works &amp; Gems</p>
+                        <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">AMK Jewel Works &amp; Gems</p>
                         <p className="text-sm font-bold text-[#5A1421]">Mrs. K. Vijaya</p>
-                        <p className="text-[10px] sm:text-[11px] text-[#5A1421]/80 mb-3 uppercase tracking-wide">B.A.</p>
-                        <p className="text-[11px] text-[#C9A84C] font-semibold mt-1">Contact: 98431 42063</p>
+                        <p className="text-[10px] text-[#5A1421]/80 mb-2 uppercase tracking-wide">B.A.</p>
+                        <a href="tel:+919843142063" className="inline-flex items-center gap-1.5 text-xs text-[#5A1421] font-sans hover:text-[#6B1B2A] transition-colors mt-1 font-medium">
+                          <Phone className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+                          <span>98431 42063</span>
+                        </a>
                       </div>
                     </div>
                   </motion.div>
 
-                  {/* 6. Family */}
-                  <motion.div variants={sectionVariants} className="w-full mb-12">
-                    <div className="flex justify-center mb-6">
-                      <div className="w-16 h-[1px] bg-[#C9A84C]/40" />
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      <div className="text-center sm:text-right sm:pr-6">
-                        <p className="text-[10px] tracking-widest uppercase text-[#C9A84C] mb-2 font-semibold">Groom's Family</p>
-                        <p className="text-sm font-bold text-[#5A1421]">Mr. M. Ramesh Aravind, B.E.</p>
-                        <p className="text-[10px] text-[#5A1421]/70 uppercase tracking-wide mt-1">Senior Engineer, Ford Motors</p>
+                  {/* 8. FAMILY / SIBLINGS SECTION */}
+                  <motion.div variants={sectionVariants} className="w-full mb-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="bg-[#4A101A]/5 border border-[#D4AF37]/40 p-3.5 rounded-lg text-center sm:text-right">
+                        <p className="text-[10px] tracking-widest uppercase font-cinzel text-[#D4AF37] mb-1 font-bold">Groom's Brother</p>
+                        <p className="text-xs font-bold text-[#5A1421]">Mr. M. Ramesh Aravind, B.E.</p>
+                        <p className="text-[10px] text-[#5A1421]/70 uppercase tracking-wide">Senior Engineer, Ford Motors</p>
                       </div>
-                      <div className="text-center sm:text-left sm:pl-6">
-                        <p className="text-[10px] tracking-widest uppercase text-[#C9A84C] mb-2 font-semibold">Bride's Family</p>
-                        <p className="text-sm font-bold text-[#5A1421]">Mr. K. Praveenkumar, B.C.A.</p>
-                        <p className="text-[10px] text-[#5A1421]/70 uppercase tracking-wide mt-1">Software Developer, Avitam Tech</p>
+
+                      <div className="bg-[#4A101A]/5 border border-[#D4AF37]/40 p-3.5 rounded-lg text-center sm:text-left">
+                        <p className="text-[10px] tracking-widest uppercase font-cinzel text-[#D4AF37] mb-1 font-bold">Bride's Brother</p>
+                        <p className="text-xs font-bold text-[#5A1421]">Mr. K. Praveenkumar, B.C.A.</p>
+                        <p className="text-[10px] text-[#5A1421]/70 uppercase tracking-wide">Software Developer, Avitam Tech</p>
                       </div>
                     </div>
                   </motion.div>
 
-                  {/* 7. Blessing */}
-                  <motion.div variants={sectionVariants} className="w-full bg-white/40 border border-[#C9A84C]/30 p-6 rounded-lg mb-10">
-                    <p className="font-serif italic text-sm sm:text-base text-center text-[#6B1B2A]/90 leading-relaxed">
-                      "We warmly invite you to grace this auspicious occasion with your presence and shower your blessings upon the newly married couple as they embark on a beautiful journey of togetherness."
+                  {/* 9. BLESSINGS CARD */}
+                  <motion.div variants={sectionVariants} className="w-full bg-[#4A101A] text-[#FFE89C] border border-[#D4AF37] p-6 rounded-xl my-4 shadow-lg text-center relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
+                    <p className="font-serif italic text-base sm:text-lg leading-relaxed mb-4 text-[#FFE89C]/90">
+                      "We warmly invite you to grace this auspicious occasion with your presence and shower your blessings upon the couple as they embark on a beautiful journey of togetherness."
                     </p>
+
+                    {/* Interactive RSVP & Share buttons */}
+                    <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
+                      <button
+                        onClick={() => setShowRsvpModal(true)}
+                        className="py-2.5 px-5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#AA8022] text-[#3D0C14] font-cinzel font-bold text-xs tracking-wider uppercase shadow hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5"
+                      >
+                        <Heart className="w-3.5 h-3.5 text-[#3D0C14] fill-current" />
+                        Send Best Wishes / RSVP
+                      </button>
+
+                      <button
+                        onClick={handleShare}
+                        className="py-2.5 px-4 rounded-full bg-[#3D0C14] text-[#FFE89C] font-cinzel text-xs font-semibold tracking-wider uppercase border border-[#D4AF37]/60 hover:bg-[#2A080E] active:scale-95 transition-all flex items-center gap-1.5"
+                      >
+                        <Share2 className="w-3.5 h-3.5 text-[#D4AF37]" />
+                        Share Invitation
+                      </button>
+                    </div>
                   </motion.div>
 
                   {/* 8. Footer */}
@@ -342,6 +570,119 @@ export default function WeddingInvitation() {
                 </motion.div>
               </div>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* FULLSCREEN IMAGE ZOOM MODAL */}
+      <AnimatePresence>
+        {isZoomed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-4 backdrop-blur-md"
+            onClick={() => setIsZoomed(false)}
+          >
+            <button
+              onClick={() => setIsZoomed(false)}
+              className="absolute top-4 right-4 text-[#FFE89C] bg-[#4A101A] p-2.5 rounded-full border border-[#D4AF37]"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              className="relative max-w-[90vw] max-h-[85vh] rounded-xl overflow-hidden border-2 border-[#D4AF37] shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img src={coupleImg} onError={handleImageError} alt="Full Portrait" className="w-auto h-auto max-h-[85vh] object-contain" />
+            </motion.div>
+            <p className="font-serif text-[#FFE89C] text-sm mt-3 italic">M. Karthikeyan &amp; K. Soundariya</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* RSVP / SEND BLESSINGS MODAL */}
+      <AnimatePresence>
+        {showRsvpModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm"
+            onClick={() => setShowRsvpModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-[#FDF6E3] border-2 border-[#D4AF37] rounded-xl p-6 w-full max-w-[420px] shadow-2xl relative text-left"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowRsvpModal(false)}
+                className="absolute top-3 right-3 text-[#5A1421] p-1.5 rounded-full hover:bg-[#D4AF37]/20"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {!blessingSubmitted ? (
+                <>
+                  <div className="text-center mb-4">
+                    <h3 className="font-cinzel text-lg text-[#6B1B2A] font-bold">Send Your Blessings</h3>
+                    <p className="text-xs text-[#5A1421]/80 font-serif">Shower your warm wishes upon Karthikeyan &amp; Soundariya</p>
+                  </div>
+
+                  <form onSubmit={submitBlessing} className="space-y-4">
+                    <div>
+                      <label className="block text-xs uppercase font-cinzel font-bold text-[#6B1B2A] mb-1">Your Name *</label>
+                      <input
+                        type="text"
+                        required
+                        value={guestName}
+                        onChange={(e) => setGuestName(e.target.value)}
+                        placeholder="Enter your full name"
+                        className="w-full px-3 py-2 rounded-lg border border-[#D4AF37] bg-[#FFFDF7] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs uppercase font-cinzel font-bold text-[#6B1B2A] mb-1">Your Blessing / Message</label>
+                      <textarea
+                        rows={3}
+                        value={blessingMsg}
+                        onChange={(e) => setBlessingMsg(e.target.value)}
+                        placeholder="Wishing you a lifetime of love and happiness..."
+                        className="w-full px-3 py-2 rounded-lg border border-[#D4AF37] bg-[#FFFDF7] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full py-3 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#AA8022] text-[#3D0C14] font-cinzel font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow hover:opacity-95 transition-all"
+                    >
+                      <Send className="w-4 h-4" />
+                      Send Blessings
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <div className="text-center py-6">
+                  <CheckCircle2 className="w-12 h-12 text-[#D4AF37] mx-auto mb-3 animate-bounce" />
+                  <h3 className="font-cinzel text-lg text-[#6B1B2A] font-bold mb-1">Thank You, {guestName}!</h3>
+                  <p className="text-sm text-[#5A1421] font-serif italic mb-4">Your heartfelt blessings have been sent to the couple!</p>
+                  <button
+                    onClick={() => { setShowRsvpModal(false); setBlessingSubmitted(false); setGuestName(''); setBlessingMsg(''); }}
+                    className="px-6 py-2 rounded-full bg-[#4A101A] text-[#FFE89C] text-xs font-cinzel font-bold"
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

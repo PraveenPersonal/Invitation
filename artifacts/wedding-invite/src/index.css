@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
@@ -6,6 +6,8 @@
 @theme inline {
   --font-sans: 'Cormorant Garamond', Georgia, serif;
   --font-serif: 'Playfair Display', Georgia, serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-script: 'Great Vibes', cursive;
 }
 
 @layer base {
@@ -19,7 +21,26 @@
     font-family: var(--font-sans, 'Cormorant Garamond', Georgia, serif);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #3D0C14;
+    background-color: #2A080E;
     color: #5A1421;
   }
+}
+
+.gold-text-gradient {
+  background: linear-gradient(135deg, #FFE89C 0%, #D4AF37 40%, #AA8022 70%, #F5E08F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-glow {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25), inset 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+.gold-foil-bg {
+  background: linear-gradient(135deg, #D4AF37 0%, #FFE89C 30%, #AA8022 60%, #E8D385 100%);
+}
+
+.royal-glass {
+  background: rgba(253, 246, 227, 0.96);
+  backdrop-filter: blur(12px);
 }
